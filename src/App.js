@@ -1,38 +1,22 @@
-import axios from 'axios'
 import { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { createUserAction, signInUserAction } from './store/actions/authActions'
 
 function App() {
-	const config = {
-		headers: {
-			'Access-Control-Allow-Origin': '*',
-			'Content-Type': 'multipart/form-data',
-			Authorization: 'Bearer 2f3c4667-e701-477b-82bb-580dd0eaf5bb',
-		},
-	}
+	const state = useSelector((state) => state.auth)
+	const dispatch = useDispatch()
 
 	let data = new FormData()
-	data.append('email', 'test@user1.com')
-	data.append('password', '12345678')
-	data.append('confirmation', '12345678')
+	data.append('email', 'test@test2.com')
+	data.append('password', '1234')
 
 	useEffect(() => {
-		const fechtPosts = async () => {
-			axios
-				.post('https://api.base-api.io/v1/users', data, config)
-				.then((res) => {
-					console.log(JSON.stringify(res.data))
-				})
-				.catch((err) => {
-					console.log(err.response.data.error)
-				})
-		}
-
-		fechtPosts()
+		dispatch(signInUserAction(data))
 	}, [])
 
 	return (
 		<div className='App'>
-			<button>test create user</button>
+			<button onClick={() => console.log(state)}>Get State</button>
 		</div>
 	)
 }
