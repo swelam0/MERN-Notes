@@ -3,11 +3,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { createUserAction, signInUserAction } from './store/actions/authActions'
 
 function App() {
-	const state = useSelector((state) => state.auth)
+	const state = useSelector((state) => state)
 	const dispatch = useDispatch()
 
 	let data = new FormData()
-	data.append('email', 'test@test2.com')
+	data.append('email', 'test@test.com')
 	data.append('password', '1234')
 
 	useEffect(() => {
